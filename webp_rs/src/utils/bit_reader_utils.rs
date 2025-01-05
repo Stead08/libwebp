@@ -148,7 +148,7 @@ pub fn vp8_get_signed_value(br: &mut VP8BitReader, bits: i32) -> i32 {
 pub fn vp8_get_bit(br: &mut VP8BitReader, prob: i32) -> i32 {
     let split = (((br.range_ as u32) * (prob as u32)) >> 8) as u32;
     let bit: i32;
-
+    #[allow(arithmetic_overflow)]
     if (br.value_ as u32) > (split << (BITS + 8)) {
         br.range_ -= split + 1;
         br.value_ -= (split + 1) as bit_t;
